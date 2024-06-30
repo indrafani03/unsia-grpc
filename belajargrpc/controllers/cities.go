@@ -67,3 +67,9 @@ func (s *City) Delete(ctx context.Context, in *cities.Id) (*cities.MyBoolean, er
 	}
 	return &cities.MyBoolean{Boolean: true}, nil
 }
+
+func (s *City) Update(ctx context.Context, in *cities.City) (*cities.City, error) {
+	var cityModel models.City
+	err := cityModel.Update(ctx, s.DB, in)
+	return &cities.City{Name: in.Name, Id: in.Id}, err
+}
